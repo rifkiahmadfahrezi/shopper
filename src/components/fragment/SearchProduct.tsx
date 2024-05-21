@@ -1,7 +1,6 @@
 import {
    Dialog,
    DialogContent,
-   DialogDescription,
    DialogHeader,
    DialogTitle,
    DialogTrigger,
@@ -15,7 +14,7 @@ import {
  export default function SearchProduct() {
    return (
       <Dialog>
-         <DialogTrigger>
+         <DialogTrigger className="btn btn-ghost">
             <RiSearchLine size={24}/>
          </DialogTrigger>
          <DialogContent>
