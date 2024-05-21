@@ -22,7 +22,7 @@ export default function HomeBanner() {
       plugins={[plugin.current]}
       className="w-full max-w-[80vw] h-[400px] mx-auto"
       opts={{
-         loop: true
+         loop: true,
       }}
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}

@@ -1,23 +1,19 @@
 
 import Link from 'next/link'
 import ThemeToggler from './ThemeToggler'
-import { Button } from '@/components/ui/button'
-import { RiShoppingBagLine, RiMenu3Line } from '@remixicon/react'
+import { RiShoppingBagLine, RiMenu3Line, RiSearchLine } from '@remixicon/react'
 import {
    Sheet,
    SheetContent,
    SheetTrigger,
  } from "@/components/ui/sheet"
  import { Separator } from '../ui/separator'
- import MyTooltip from './MyTooltip'
+ import { Input } from '../ui/input'
+ import { Button } from '@/components/ui/button'
  import SearchProduct from './SearchProduct'
 
 const Navbar = () => { 
    const navLinks = [
-     {
-       link: "/",
-       content : "Home"
-     },
      {
        link: "/products",
        content : "Products"
@@ -48,10 +44,19 @@ const Navbar = () => {
        <div className="container-lg mx-auto px-5">
          <div className="flex justify-between items-center py-5">
            <Link href={'/'} className='font-bold text-xl capitalize btn btn-ghost'>
-             Shopper
+             {process.env.NEXT_PUBLIC_SHOP_NAME}
            </Link>
- 
-           <ul className='hidden lg:flex items-center gap-2'>
+
+           <div className="flex items-center gap-3">
+            <form className="hidden xl:flex w-full items-center space-x-2 max-w-lg">
+                <Input type="search" placeholder="Search some product..." />
+                <Button type="submit">
+                  <RiSearchLine size={16}/>
+                </Button>
+              </form>
+           </div>
+
+           <ul className='hidden xl:flex items-center gap-2'>
              {navLinks.map(item => (
                <li key={item.link}>
                  <Link href={item.link} className='capitalize text-base font-medium btn btn-ghost'>
@@ -60,11 +65,6 @@ const Navbar = () => {
                </li>
              ))}
              <li>
-                <MyTooltip text='search product'>
-                  <SearchProduct />
-                </MyTooltip>
-             </li>
-             <li>
                 <Link href="/cart">
                   <span className='btn btn-ghost flex'>
                     <RiShoppingBagLine size={24} />
@@ -72,9 +72,7 @@ const Navbar = () => {
                 </Link>
              </li>
              <li>
-                <MyTooltip text="change theme" >
-                  <ThemeToggler />
-                </MyTooltip>
+                <ThemeToggler />
              </li>
              {navAction.map(item => (
                <li key={item.link}>
@@ -82,17 +80,20 @@ const Navbar = () => {
                </li>
              ))}
            </ul>
-           <div className="flex items-center lg:hidden">
-            <ul className='flex item-center gap-4'>
-              <li>
+           <div className="flex items-center xl:hidden">
+            <ul className='flex item-center gap-3 bg-blue'>
+              <li className=''>
                 <Link href="/cart">
+                  <div className="btn btn-ghost">
                   <RiShoppingBagLine size={24} />
+                  </div>
                 </Link>
               </li>
               <li>
-                <MyTooltip text="change theme">
-                  <ThemeToggler />
-                </MyTooltip>
+                <SearchProduct />
+              </li>
+              <li className='mt-2'>
+                <ThemeToggler />
               </li>
             </ul>
            <Sheet>
