@@ -15,7 +15,7 @@ interface TooltipProps {
       <TooltipProvider>
          <Tooltip>
             <TooltipTrigger>
-               <div className="btn btn-ghost" title={props.text}>
+               <div className="min-w-fit">
                   {props.children}
                </div>
             </TooltipTrigger>
