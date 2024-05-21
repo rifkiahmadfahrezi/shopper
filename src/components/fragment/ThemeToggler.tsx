@@ -2,7 +2,6 @@
 
 
 import { useEffect, useState } from "react"
-import { RiMoonClearFill, RiSunFill } from "@remixicon/react"
 
 export default function ThemeToggler() {
 
@@ -42,12 +41,13 @@ export default function ThemeToggler() {
    }, [isDark])
 
    return (
-      <label onClick={changeTheme} 
+      <label 
          htmlFor="theme-toggler" 
-         className="relative">
-         {isDark ? <RiMoonClearFill /> : <RiSunFill /> }
+         className="relative btn btn-outline cursor-pointer">
+         <span className="capitalize select-none">{isDark ? "light" : "dark" }</span>
          <input 
-            className="absolute top-0 size-6 -left-3 opacity-0 cursor-pointer"
+            onChange={changeTheme}
+            className="absolute h-full w-full appearance-none inset-0 cursor-pointer"
             type="checkbox" 
             id="theme-toggler" 
             aria-checked={!isDark} 
