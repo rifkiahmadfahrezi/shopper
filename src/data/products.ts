@@ -8,12 +8,16 @@ export interface ProductRating {
 export interface Product {
    id: number | string;
    title: string;
-   price: number;
    description: string;
+   price: number;
+   discountPercentage ?: number;
+   stock : number;
+   brand?: string;
    category: string;
-   image: string;
+   thumbnail: string;
+   rating : number | string;
+   images : string[];
    blurImage ?: string;
-   rating : ProductRating;
 }
 
 export const getProduct = async () => {
@@ -22,7 +26,46 @@ export const getProduct = async () => {
       if (req.status !== 200){
          throw new Error("Failed to get product => " + req.status)
       }
+      return req.data.products
+
+   } catch (error) {
+      console.error(error)
+   }
+}
+
+export const getProductDetails = async (id : string | number) => {
+   try {
+      const req = await myShop.get(`/products/${id}`)
+      if (req.status !== 200){
+         throw new Error("Failed to get product => " + req.status)
+      }
       return req.data
+
+   } catch (error) {
+      console.error(error)
+   }
+}
+
+export const getAllProductId = async () => {
+   try {
+      const req = await myShop.get(`/products`)
+      if (req.status !== 200){
+         throw new Error("Failed to get product => " + req.status)
+      }
+      return req.data.products.id.push([])
+
+   } catch (error) {
+      console.error(error)
+   }
+}
+
+export const getAllProducts = async() => {
+   try {
+      const req = await myShop.get(`/products?limit=100`)
+      if (req.status !== 200){
+         throw new Error("Failed to get product => " + req.status)
+      }
+      return req.data.products
 
    } catch (error) {
       console.error(error)
