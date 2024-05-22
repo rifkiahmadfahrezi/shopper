@@ -7,6 +7,7 @@ import { AspectRatio } from "../ui/aspect-ratio"
 import { RiStarFill, RiShoppingBagLine } from "@remixicon/react"
 import { Badge } from "../ui/badge"
 import MyTooltip from "./MyTooltip"
+import Link from "next/link"
 
 import { getProduct, type Product } from "@/data/products"
 
@@ -116,11 +117,13 @@ import { getProduct, type Product } from "@/data/products"
  const ProductsList : React.FC = async () => {
 
   const products = await getProduct()
-   
+
+
+  // return
     
    const newProducts = async () =>{
       const promises = products.map(async (product : Product) => {
-         const blur = await getBase64(product.image);
+         const blur = await getBase64(product.thumbnail);
          return {
            ...product,
            blurImage: blur,
@@ -135,9 +138,10 @@ import { getProduct, type Product } from "@/data/products"
      <>
        <div className="grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
          {newProducts()
-         .then(data => 
+         .then(( data : any) => 
             data.map((product : Product) => (
-               <Card key={product.id} className="overflow-hidden">
+              
+              <Card key={product.id} className="overflow-hidden">
                   <AspectRatio ratio={1 / 1}>
                      <Image 
                        className="w-full h-full max-h-[300px] object-cover"
@@ -146,11 +150,12 @@ import { getProduct, type Product } from "@/data/products"
                        height={300}
                        blurDataURL={product.blurImage}
                        placeholder="blur"
-                       src={product.image} 
+                       src={product.thumbnail} 
                        alt={product.title} />
                   </AspectRatio>
+                 <Link className="group"  href={`/products/${encodeURI(`${product.id}`)}`}>
                  <CardContent className="mt-3">
-                     <h1 className="text-base line-clamp-2" title={product.title}>{product.title}</h1>
+                     <h1 className="text-base line-clamp-2 group-hover:underline" title={product.title}>{product.title}</h1>
                      <p className="font-semibold text-xl">$ {product.price}</p>
                      <Badge className="my-3 capitalize" variant={"outline"}>
                       {process.env.NEXT_PUBLIC_SHOP_NAME}
@@ -158,10 +163,11 @@ import { getProduct, type Product } from "@/data/products"
                      <div className="my-4">
                         <Badge variant={"outline"}>
                           <RiStarFill size={16} className="fill-yellow-500" />
-                          <span className="mx-2 ">{product.rating.rate}</span>
+                          <span className="mx-2 ">{product.rating}</span>
                         </Badge>
                      </div>
                  </CardContent>
+               </Link>
                  <CardFooter className="flex gap-2 items-center">
                    <Button className="flex-1 flex-shrink">
                      <span className="mx-2 capitalize">buy now</span> 
