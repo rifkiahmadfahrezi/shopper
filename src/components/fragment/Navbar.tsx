@@ -1,4 +1,4 @@
-
+"use client"
 import Link from 'next/link'
 import ThemeToggler from './ThemeToggler'
 import { RiShoppingBagLine, RiMenu3Line, RiSearchLine } from '@remixicon/react'
@@ -11,8 +11,15 @@ import {
  import { Input } from '../ui/input'
  import { Button } from '@/components/ui/button'
  import SearchProduct from './SearchProduct'
+ import { usePathname } from 'next/navigation'
+ import { cn } from '@/lib/utils'
 
 const Navbar = () => { 
+
+  const pathname = usePathname()
+
+  const activeLink = (current : string) : boolean => pathname == current
+
    const navLinks = [
      {
        link: "/products",
@@ -59,7 +66,7 @@ const Navbar = () => {
            <ul className='hidden xl:flex items-center gap-2'>
              {navLinks.map(item => (
                <li key={item.link}>
-                 <Link href={item.link} className='capitalize text-base font-medium btn btn-ghost'>
+                 <Link href={item.link} className={cn('capitalize text-base font-medium btn btn-ghost', activeLink(item.link) && "bg-secondary/90" )}>
                    {item.content}
                  </Link>
                </li>
