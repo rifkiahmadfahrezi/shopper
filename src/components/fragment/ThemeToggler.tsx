@@ -1,58 +1,40 @@
-"use client"
+// app/components/ThemeSwitch.tsx
+'use client'
 
+import { RiSunFill, RiMoonFill } from '@remixicon/react'
+import { useState, useEffect } from 'react'
+import { useTheme } from 'next-themes'
+import Image from "next/image"
+import { Button } from '../ui/button'
 
-import { useEffect, useState } from "react"
+export default function ThemeSwitch() {
+  const [mounted, setMounted] = useState(false)
+  const { setTheme, resolvedTheme } = useTheme()
 
-export default function ThemeToggler() {
+  useEffect(() =>  setMounted(true), [])
 
-   const [isDark, setIsDark] = useState<boolean>(false)
+  if (!mounted) return (
+    <Image
+      src="data:image/svg+xml;base64,PHN2ZyBzdHJva2U9IiNGRkZGRkYiIGZpbGw9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMCIgdmlld0JveD0iMCAwIDI0IDI0IiBoZWlnaHQ9IjIwMHB4IiB3aWR0aD0iMjAwcHgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB4PSIyIiB5PSIyIiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjIiIHJ4PSIyIj48L3JlY3Q+PC9zdmc+Cg=="
+      width={36}
+      height={36}
+      sizes="36x36"
+      alt="Loading Light/Dark Toggle"
+      priority={false}
+      title="Loading Light/Dark Toggle"
+    />
+  )
 
-   function setDefaultTheme() {
-      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-         document.documentElement.classList.add("dark")
-         localStorage.setItem('theme', "true")
-         setIsDark(true)
-     }else{
-         document.documentElement.classList.remove("dark")
-         localStorage.setItem('theme', "false")
-         setIsDark(true)
-     }
-   }
+  if (resolvedTheme === 'dark') {
+    return <Button variant={"outline"} onClick={() => setTheme('light')}>
+      <RiSunFill  />
+    </Button>
+  }
 
-   function changeTheme(){
-      if (window.matchMedia) {
-         window.matchMedia(`(prefers-color-scheme: ${isDark ? 'dark' : 'light'})`)
-      }
-      localStorage.setItem('theme', isDark ? 'dark' : 'light')
-      setIsDark(!isDark)
-   }
+  if (resolvedTheme === 'light') {
+    return <Button variant={"outline"} onClick={() => setTheme('dark')}>
+    <RiMoonFill  />
+  </Button>
+  }
 
-
-   useEffect(() => {
-      setDefaultTheme()
-   }, [])
-
-   useEffect(() => {
-      if(isDark){
-         document.documentElement.classList.add('dark')
-      }else{
-         document.documentElement.classList.remove('dark')
-      }
-   }, [isDark])
-
-   return (
-      <label 
-         htmlFor="theme-toggler" 
-         className="relative btn btn-outline cursor-pointer">
-         <span className="capitalize select-none">{isDark ? "light" : "dark" }</span>
-         <input 
-            onChange={changeTheme}
-            className="absolute h-full w-full appearance-none inset-0 cursor-pointer"
-            type="checkbox" 
-            id="theme-toggler" 
-            aria-checked={!isDark} 
-            defaultChecked={isDark}
-            />
-      </label>
-   )
 }
