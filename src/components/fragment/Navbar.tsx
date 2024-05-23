@@ -31,7 +31,7 @@ const Navbar = () => {
      {
        link: "/sign-in",
        content: <Link 
-             href="sign-in" 
+             href="/sign-in" 
              className='capitalize font-medium btn btn-outline w-full'>
                sign in
              </Link>
@@ -39,7 +39,7 @@ const Navbar = () => {
      {
        link: "/sign-up",
        content: <Link 
-             href="sign-up" 
+             href="/sign-up" 
              className='capitalize font-medium btn btn-default w-full'>
                sign up
              </Link>
@@ -54,9 +54,9 @@ const Navbar = () => {
              {process.env.NEXT_PUBLIC_SHOP_NAME}
            </Link>
 
-           <div className="flex items-center gap-3">
-            <form className="hidden xl:flex w-full items-center space-x-2 max-w-lg">
-                <Input type="search" placeholder="Search some product..." />
+           <div className="flex items-center gap-3 w-2/4 max-w-xl">
+            <form className="hidden xl:flex w-full items-center space-x-2">
+                <Input type="search" className='w-full' placeholder="Search some product..." />
                 <Button type="submit">
                   <RiSearchLine size={16}/>
                 </Button>

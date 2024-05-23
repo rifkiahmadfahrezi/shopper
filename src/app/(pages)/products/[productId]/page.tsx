@@ -1,9 +1,9 @@
 
 
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import BackButton from "@/components/ui/back-button"
 import { Separator } from "@/components/ui/separator"
-import { RiStarFill, RiCheckFill } from "@remixicon/react"
+import { RiStarFill, RiCheckFill, RiArrowLeftLine } from "@remixicon/react"
 import { 
     getAllProducts, 
     getProductDetails,
@@ -21,7 +21,6 @@ type CarouselImage = {
 export default async function ProductDetailPage({ params } : Params) {
   
   const  product : Product = await getProductDetails(params.productId)
-
   if(!product?.id) return notFound()
 
   const images = async () =>{
@@ -38,47 +37,54 @@ export default async function ProductDetailPage({ params } : Params) {
 
   const carouselImage : CarouselImage[] = await images()
 
-  const findThumbnailBlur = carouselImage.find((img) => img.src === product.thumbnail) || ""
-
 
   return (
-    <div className="grid md:grid-cols-2 gap-6 lg:gap-12 items-start max-w-6xl px-4 mx-auto py-6">
-      <ProductImagePreview 
-        thumbnail={product.thumbnail}
-        images={carouselImage}
-      />
-
-
-      <div className="grid gap-4 md:gap-10">
+    
+    <div className="container mx-auto px-5">
       
-        <div>
-          <h1 className="font-bold text-3xl lg:text-4xl">{product.title}</h1>
+      <div className="flex items-center flex-col lg:flex-row gap-6 py-6">
+        <div className="w-full max-w-[550px]">
+          <ProductImagePreview 
+            thumbnail={product.thumbnail}
+            images={carouselImage}
+          />
         </div>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-0.5">
-            <RiStarFill className="size-5 fill-yellow-500" />
-            {product.rating}
+
+
+        <div className="ml-0 lg:ml-10 w-full grid gap-4 md:gap-10 max-w-[550px]">
+        
+          <div>
+            <h1 className="font-bold text-3xl lg:text-4xl">{product.title}</h1>
           </div>
-          {product.stock > 0 && 
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-0.5">
-              <RiCheckFill className="size-5 fill-green-500" />
-              <span className="capitalize">stock ({product.stock})</span>
+              <RiStarFill className="size-5 fill-yellow-500" />
+              {product.rating}
             </div>
-          }
-          <div className="text-4xl font-bold">$ {product.price}</div>
+            {product.stock > 0 && 
+              <div className="flex items-center gap-0.5">
+                <RiCheckFill className="size-5 fill-green-500" />
+                <span className="capitalize">stock ({product.stock})</span>
+              </div>
+            }
+            <div className="text-4xl font-bold">$ {product.price}</div>
+          </div>
+        <Separator />
+        <article className="min-h-[200px]">
+          {product.description}
+        </article>
+        <div className="flex items-center gap-3 w-full">
+            <Button className="capitalize w-full min-w-fit">
+              buy now
+            </Button>
+            <Button className="capitalize w-full min-w-fit" variant={"outline"}>
+              add to cart
+            </Button>
         </div>
-      <Separator />
-      <article className="min-h-[200px]">
-        {product.description}
-      </article>
-      <div className="flex items-center gap-3 w-full">
-          <Button className="capitalize w-full min-w-fit">
-            buy now
-          </Button>
-          <Button className="capitalize w-full min-w-fit" variant={"outline"}>
-            add to cart
-          </Button>
+        </div>
       </div>
+      <div className="py-5">
+          <BackButton />
       </div>
     </div>
   )

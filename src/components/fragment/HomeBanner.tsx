@@ -20,7 +20,7 @@ export default function HomeBanner() {
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="w-full max-w-[80vw] h-[400px] mx-auto"
+      className="w-full max-w-[85vw] h-[400px] mx-auto group"
       opts={{
          loop: true,
       }}
@@ -28,7 +28,6 @@ export default function HomeBanner() {
       onMouseLeave={plugin.current.reset}
     >
       
-      <CarouselPrevious />
       <CarouselContent>
         {Array.from({ length: 5 }).map((_, index) => (
           <CarouselItem key={index} className="h-[400px]" >
@@ -42,7 +41,8 @@ export default function HomeBanner() {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselNext />
+      <CarouselPrevious className="left-5 transition size-10 duration-200 opacity-0 pointer-events-none -translate-x-2 group-hover:translate-x-0 group-hover:opacity-100 group-hover:pointer-events-auto" />
+          <CarouselNext className="right-5 transition size-10 duration-200 opacity-0 pointer-events-none translate-x-2 group-hover:translate-x-0 group-hover:opacity-100 group-hover:pointer-events-auto" />
     </Carousel>
   )
 }
