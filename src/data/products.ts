@@ -30,6 +30,7 @@ export const getProduct = async () => {
 
    } catch (error) {
       console.error(error)
+      return undefined
    }
 }
 
@@ -43,6 +44,7 @@ export const getProductDetails = async (id : string | number) => {
 
    } catch (error) {
       console.error(error)
+      return undefined
    }
 }
 
@@ -56,6 +58,7 @@ export const getAllProductId = async () => {
 
    } catch (error) {
       console.error(error)
+      return undefined
    }
 }
 
@@ -69,5 +72,6 @@ export const getAllProducts = async() => {
 
    } catch (error) {
       console.error(error)
+      return undefined
    }
 }

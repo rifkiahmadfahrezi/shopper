@@ -1,4 +1,4 @@
-import { useState, useEffect, RefObject } from 'react';
+import { useState, useEffect, RefObject, useCallback } from 'react';
 
 interface UseZoomReturn {
   x: number;
@@ -9,7 +9,7 @@ export const useZoom = (elementRef: RefObject<HTMLDivElement>) => {
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
 
-  const handleZoom = (e: MouseEvent | TouchEvent) => {
+  const handleZoom = useCallback((e: MouseEvent | TouchEvent) => {
     
     const zoomer = elementRef.current;
     if (!zoomer) return;
@@ -31,7 +31,7 @@ export const useZoom = (elementRef: RefObject<HTMLDivElement>) => {
     setY(yPercent);
 
     zoomer.style.backgroundPosition = `${xPercent}% ${yPercent}%`;
-  };
+  }, [elementRef]);
 
   const removeBg = () => {
     const zoomer = elementRef.current;
@@ -55,7 +55,7 @@ export const useZoom = (elementRef: RefObject<HTMLDivElement>) => {
       zoomer.addEventListener('touchend', handleZoom);
       zoomer.addEventListener('mouseleave', handleZoom);
     };
-  }, [elementRef]);
+  }, [elementRef, handleZoom]);
 
   return { x, y };
 };

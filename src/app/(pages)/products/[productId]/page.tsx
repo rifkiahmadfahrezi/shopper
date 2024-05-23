@@ -1,4 +1,6 @@
 
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 import { Button } from "@/components/ui/button"
 import BackButton from "@/components/ui/back-button"
@@ -18,9 +20,36 @@ type CarouselImage = {
   src : string,
   blurImage : string
 }
+
+
+
+export async function generateStaticParams() {
+  const products = await getAllProducts()
+
+  return products.map((product : Product) => ({
+      productId : product.id.toString()
+  }))
+}
+
+export async function generateMetadata({ params } : Params ){
+  const product : Product = await getProductDetails(params.productId)
+  if(!product.id){
+    return {
+      title: 'Product not found',
+    }
+  }
+
+  return {
+    title : product.title,
+    description : product.description,
+  }
+}
+
+
 export default async function ProductDetailPage({ params } : Params) {
   
   const  product : Product = await getProductDetails(params.productId)
+
   if(!product?.id) return notFound()
 
   const images = async () =>{
@@ -90,27 +119,3 @@ export default async function ProductDetailPage({ params } : Params) {
   )
 }
 
-
-
-export async function generateStaticParams() {
-  const products = await getAllProducts()
-
-  return products.map((product : Product) => ({
-      productId : product.id.toString()
-  }))
-}
-
-export async function generateMetadata({ params } : Params ){
-  const product : Product = await getProductDetails(params.productId)
-  if(!product.id){
-    return {
-      title: 'Product not found',
-    }
-  }
-
-  return {
-    title : product.title,
-    description : product.description,
-    image : product.thumbnail
-  }
-}
