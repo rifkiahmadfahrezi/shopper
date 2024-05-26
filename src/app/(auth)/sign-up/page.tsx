@@ -4,6 +4,12 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { RiGoogleFill } from "@remixicon/react"
 import { Grocery1 } from "@/components/icons"
+import { Metadata } from "next"
+
+export const metadata : Metadata = {
+  title: "Sign up - start your journey here"
+}
+
 
 export default function Component() {
   return (
