@@ -13,6 +13,7 @@ import {
  import SearchProduct from './SearchProduct'
  import { usePathname } from 'next/navigation'
  import { cn } from '@/lib/utils'
+ import DropdownCart from './DropdownCart'
 
 const Navbar = () => { 
 
@@ -48,7 +49,7 @@ const Navbar = () => {
  
    return (
      <nav className='bg-background w-full sticky top-0 z-50'>
-       <div className="container-lg mx-auto px-5">
+       <div className="container mx-auto px-5">
          <div className="flex justify-between items-center py-5">
            <Link href={'/'} className='font-bold text-xl capitalize btn btn-ghost'>
              {process.env.NEXT_PUBLIC_SHOP_NAME}
@@ -72,11 +73,7 @@ const Navbar = () => {
                </li>
              ))}
              <li>
-                <Link href="/cart">
-                  <span className='btn btn-ghost flex'>
-                    <RiShoppingBagLine size={24} />
-                  </span>
-                </Link>
+                <DropdownCart />
              </li>
              <li>
                 <ThemeToggler />
