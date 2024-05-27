@@ -8,12 +8,12 @@ import { Separator } from "@/components/ui/separator"
 import { RiStarFill, RiCheckFill, RiArrowLeftLine } from "@remixicon/react"
 import { 
     getAllProducts, 
-    getProductDetails,
-    type Product} 
+    getProductDetails,} 
     from "@/data/products"
 import { notFound } from "next/navigation"
-import getBase64 from "@/components/get-base64"
+import getBase64 from "@/lib/get-base64"
 import ProductImagePreview from "./component/ProductImagePreview"
+import { type Product } from "@/types/product";
 
 type Params = { params : { productId: string}}
 type CarouselImage = {

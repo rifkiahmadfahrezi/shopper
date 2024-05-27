@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Autoplay from "embla-carousel-autoplay"
+import Image from "next/image"
 
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -20,7 +21,7 @@ export default function HomeBanner() {
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="w-full max-w-[85vw] h-[400px] mx-auto group"
+      className="w-full max-w-[1000px] max-h-[400px] mx-auto group gap-2"
       opts={{
          loop: true,
       }}
@@ -30,14 +31,16 @@ export default function HomeBanner() {
       
       <CarouselContent>
         {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem key={index} className="h-[400px]" >
-            <div className="p-1 h-full">
+          <CarouselItem key={index} className="max-h-[400px] max-w-[1000px]" >
               <Card className="h-full">
-                <CardContent className="flex items-center justify-center p-6 h-full">
-                  <span className="text-4xl font-semibold">{index + 1}</span>
-                </CardContent>
+                  <Image 
+                      width={1000}
+                      className="w-full object-cover"
+                      height={400}
+                      src="/banner.png"
+                      alt="Banner"
+                    />
               </Card>
-            </div>
           </CarouselItem>
         ))}
       </CarouselContent>
