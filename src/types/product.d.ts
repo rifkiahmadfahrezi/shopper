@@ -25,6 +25,7 @@ export interface Dimensions {
    description: string;
    category: string;
    price: number;
+   blurImage ?: string;
    discountPercentage: number;
    rating: number;
    stock: number;
