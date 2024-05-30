@@ -13,6 +13,9 @@ const nextConfig = {
        },
      ],
    },
+   env: {
+    API_BASE: "https://dummyjson.com",
+   }
 };
 
 export default nextConfig;
