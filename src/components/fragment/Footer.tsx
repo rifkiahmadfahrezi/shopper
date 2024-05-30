@@ -1,6 +1,7 @@
 
 import Link from "next/link"
 import { RiFacebookBoxFill, RiInstagramFill, RiTwitterFill } from "@remixicon/react"
+import { shopper } from "@/lib/shopper.config"
 
 export default function Footer() {
   return (
@@ -8,10 +9,10 @@ export default function Footer() {
       <div className="container mx-auto px-4 md:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
         <div className="space-y-4">
           <div className="flex items-center space-x-2">
-            <h1 className="text-2xl font-bold capitalize">{process.env.NEXT_PUBLIC_SHOP_NAME}</h1>
+            <h1 className="text-2xl font-bold capitalize">{shopper.title}</h1>
           </div>
           <p className="text-sm md:text-base">
-            Discover the best products for your home and lifestyle. Shop our curated collection with confidence.
+            {shopper.description}
           </p>
         </div>
         <div className="grid grid-cols-2 gap-8">

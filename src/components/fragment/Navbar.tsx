@@ -14,6 +14,9 @@ import {
  import { usePathname } from 'next/navigation'
  import { cn } from '@/lib/utils'
  import DropdownCart from './DropdownCart'
+ import { shopper } from '@/lib/shopper.config'
+import SearchProductForm from '../forms/SearchProductForm'
+
 
 const Navbar = () => { 
 
@@ -52,16 +55,11 @@ const Navbar = () => {
        <div className="container mx-auto px-5">
          <div className="flex justify-between items-center py-5">
            <Link href={'/'} className='font-bold text-xl capitalize btn btn-ghost'>
-             {process.env.NEXT_PUBLIC_SHOP_NAME}
+             {shopper.title}
            </Link>
 
            <div className="flex items-center gap-3 w-2/4 max-w-xl">
-            <form className="hidden xl:flex w-full items-center space-x-2">
-                <Input type="search" className='w-full' placeholder="Search some product..." />
-                <Button type="submit">
-                  <RiSearchLine size={16}/>
-                </Button>
-              </form>
+              <SearchProductForm />
            </div>
 
            <ul className='hidden xl:flex items-center gap-2'>

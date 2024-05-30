@@ -7,7 +7,7 @@ import {
    DropdownMenuTrigger,
  } from "@/components/ui/dropdown-menu"
  import { RiShoppingBagLine } from "@remixicon/react"
- import { type Product } from "@/data/products"
+import type { Product } from "@/types/product"
  import Image from "next/image"
  import Link from "next/link"
  

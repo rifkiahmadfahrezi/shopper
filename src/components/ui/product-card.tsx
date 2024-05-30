@@ -7,7 +7,8 @@ import { AspectRatio } from "./aspect-ratio"
 import Link from "next/link"
 import { Button } from "./button"
 import MyTooltip from "../fragment/MyTooltip"
-import { type Product } from "@/data/products"
+import { type Product } from "@/types/product"
+import { shopper } from "@/lib/shopper.config"
 // import Productcar
 
 export default function ProductCard ({ product } : { product : Product}){
@@ -19,8 +20,8 @@ export default function ProductCard ({ product } : { product : Product}){
                width={400}
                loading="lazy"
                height={300}
-               blurDataURL={product.blurImage}
-               placeholder="blur"
+               blurDataURL={product.blurImage && product.blurImage}
+               placeholder={product.blurImage ? "blur" : "empty"}
                src={product.thumbnail} 
                alt={product.title} />
          </AspectRatio>
@@ -29,9 +30,9 @@ export default function ProductCard ({ product } : { product : Product}){
             <h1 className="text-base line-clamp-2 group-hover:underline" title={product.title}>{product.title}</h1>
             <p className="font-semibold text-xl">$ {product.price}</p>
             <Badge className="my-3 capitalize" variant={"outline"}>
-               {process.env.NEXT_PUBLIC_SHOP_NAME}
-               </Badge>
-            <div className="my-4">
+               {shopper.title}
+            </Badge>
+            <div className="">
                <Badge variant={"outline"}>
                   <RiStarFill size={16} className="fill-yellow-500" />
                   <span className="mx-2 ">{product.rating}</span>

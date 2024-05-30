@@ -1,6 +1,8 @@
 
-export const dynamic = "force-dynamic";
-export const fetchCache = "force-no-store";
+// export const dynamic = "force-dynamic";
+// export const fetchCache = "force-no-store";
+export const revalidate = 60;
+export const dynamicParams = true
 
 import { Button } from "@/components/ui/button"
 import BackButton from "@/components/ui/back-button"
@@ -11,9 +13,11 @@ import {
     getProductDetails,} 
     from "@/data/products"
 import { notFound } from "next/navigation"
-import getBase64 from "@/lib/get-base64"
+import getBase64 from "@/components/get-base64";
 import ProductImagePreview from "./component/ProductImagePreview"
 import { type Product } from "@/types/product";
+
+import useSingleProduct from "@/hooks/product/useSingleProduct"
 
 type Params = { params : { productId: string}}
 type CarouselImage = {
@@ -33,6 +37,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params } : Params ){
   const product : Product = await getProductDetails(params.productId)
+
   if(!product.id){
     return {
       title: 'Product not found',
@@ -118,4 +123,3 @@ export default async function ProductDetailPage({ params } : Params) {
     </div>
   )
 }
-

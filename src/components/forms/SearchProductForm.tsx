@@ -3,20 +3,25 @@
 import { Input } from "../ui/input"
 import { Button } from "../ui/button"
 import { RiSearchLine } from "@remixicon/react"
-import { searchProduct } from "@/data/products"
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
+import NProgress from "next-nprogress-bar"
 
 export default function SearchProductForm() {
 
    const [keyword, setKeyword] = useState<string>("")
    const router = useRouter()
+   const pathname = usePathname()
 
    const handleSearch = async (e : React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
-      router.push('/products/search/' + encodeURIComponent(keyword))
-      // redirect('/products/search/' + decodeURI(keyword))
-      // searchProduct(keyword)
+      NProgress.startProgress()
+      if(pathname != "/products/search"){
+         router.push(`/products/search?q=${keyword}`);
+      }else{
+         router.replace(`/products/search?q=${keyword}`);
+         // router.refresh();
+      }
    }
 
    return (
