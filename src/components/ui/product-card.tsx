@@ -14,6 +14,7 @@ import { shopper } from "@/lib/shopper.config"
 export default function ProductCard ({ product } : { product : Product}){
    return (
       <Card key={product.id} className="overflow-hidden group">
+      <Link href={`/products/${encodeURI(`${product.id}`)}`}>
          <AspectRatio ratio={1 / 1} className="overflow-hidden">
             <Image 
                className="w-full h-full max-h-[300px] object-cover group-hover:scale-[1.2] transitio duration-200"
@@ -25,7 +26,6 @@ export default function ProductCard ({ product } : { product : Product}){
                src={product.thumbnail} 
                alt={product.title} />
          </AspectRatio>
-         <Link className="group"  href={`/products/${encodeURI(`${product.id}`)}`}>
          <CardContent className="mt-3">
             <h1 className="text-base line-clamp-2 group-hover:underline" title={product.title}>{product.title}</h1>
             <p className="font-semibold text-xl">$ {product.price}</p>
