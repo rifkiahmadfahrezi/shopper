@@ -17,6 +17,7 @@ import ProgressProvider from "@/components/progress-bar";
 import Navbar from "@/components/fragment/Navbar";
 import Footer from "@/components/fragment/Footer";
 import ThemeProvider from "@/components/ThemeProvider";
+import { Suspense } from "react";
 
 export default function RootLayout({
   children,
@@ -29,11 +30,13 @@ export default function RootLayout({
       <QueryClientProvider>
         <ThemeProvider>
           <ProgressProvider>
-            <Navbar />
-              <main className="min-h-svh">
-                {children}
-              </main>
-            <Footer />
+            <Suspense fallback="Loading...">
+              <Navbar />
+                <main className="min-h-svh">
+                  {children}
+                </main>
+              <Footer />
+            </Suspense>
           </ProgressProvider>
         </ThemeProvider>
       </QueryClientProvider>
