@@ -1,5 +1,5 @@
 
-import ProductResults from "./components/ProductResults"
+import ProductResults from "../../../../components/fragment/ProductResults"
 import { shopper } from "@/lib/shopper.config"
 
 interface Props {
