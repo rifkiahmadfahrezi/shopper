@@ -36,7 +36,7 @@ export default function Products() {
       if (inView && hasNextPage) {
          fetchNextPage()
       }
-   }, [inView, hasNextPage])
+   }, [inView, hasNextPage, fetchNextPage])
 
 
    if(status === "pending"){
@@ -68,14 +68,14 @@ export default function Products() {
          <GridLayout>
             {data.pages.map((page) => (
                page?.products.map((product, index, arr) => (
-                  <div ref={arr.length - 1 === index ? ref : null}>
-                     <ProductCard key={product.id} product={product}/>
+                  <div key={product.id} ref={arr.length - 1 === index ? ref : null}>
+                     <ProductCard  product={product}/>
                   </div>
                )
             )))}
          </GridLayout>
          <GridLayout>
-            {(isFetchingNextPage) &&
+            {(isFetchingNextPage && data.pages[0]?.total !==  data.pages[data.pages.length - 1]?.skip) &&
                Array(4).fill(0).map((_, i) => (
                   <ProductCardSkeleton key={i}/>
                ))
