@@ -10,7 +10,7 @@ export interface UserInfo {
 }
 
 export interface SignIn {
-   username: string;
-   password: string;
-   expiresInMins ?: number;
+   username: string | FormDataEntryValue;
+   password: string | FormDataEntryValue;
+   expiresInMins: number;
 }
