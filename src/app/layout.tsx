@@ -19,6 +19,9 @@ import Footer from "@/components/fragment/Footer";
 import ThemeProvider from "@/components/ThemeProvider";
 import { Suspense } from "react";
 
+import AuthProvider from "@/components/AuthProvider";
+import { Toaster } from "@/components/ui/toaster";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -30,13 +33,16 @@ export default function RootLayout({
       <QueryClientProvider>
         <ThemeProvider>
           <ProgressProvider>
-            <Suspense fallback="Loading...">
-              <Navbar />
-                <main className="min-h-svh">
-                  {children}
-                </main>
-              <Footer />
-            </Suspense>
+            <AuthProvider>
+              <Suspense fallback="Loading...">
+                <Navbar />
+                  <main className="min-h-svh">
+                    {children}
+                  </main>
+                <Footer />
+                <Toaster />
+              </Suspense>
+            </AuthProvider>
           </ProgressProvider>
         </ThemeProvider>
       </QueryClientProvider>
