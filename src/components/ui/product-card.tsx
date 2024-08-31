@@ -30,7 +30,7 @@ export default function ProductCard ({ product } : { product : Product}){
             <h1 className="text-base line-clamp-2 group-hover:underline" title={product.title}>{product.title}</h1>
             <p className="font-semibold text-xl">$ {product.price}</p>
             <Badge className="my-3 capitalize" variant={"outline"}>
-               {shopper.title}
+               {product.brand}
             </Badge>
             <div className="">
                <Badge variant={"outline"}>
