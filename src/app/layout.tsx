@@ -17,7 +17,7 @@ import ProgressProvider from "@/components/progress-bar";
 import ThemeProvider from "@/components/ThemeProvider";
 import { Suspense } from "react";
 import StoreProvider from "@/components/StoreProvider";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function RootLayout({
   children,

@@ -14,7 +14,7 @@ interface TooltipProps {
    return (
       <TooltipProvider>
          <Tooltip>
-            <TooltipTrigger>
+            <TooltipTrigger asChild >
                <div className="min-w-fit">
                   {props.children}
                </div>

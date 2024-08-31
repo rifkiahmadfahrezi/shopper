@@ -12,3 +12,10 @@ export const writeInCase = (typeCase: "camel" | "snake", str: string): string =>
         .join("");
    }
  };
+
+ export const formatCurency = (amount : number | bigint | string) : string => {
+  return new Intl.NumberFormat('en', {
+    style: 'currency',
+    currency: 'USD'
+  }).format(Number(amount))
+ }

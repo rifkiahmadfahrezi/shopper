@@ -8,7 +8,8 @@ import Link from "next/link"
 import { Button } from "./button"
 import MyTooltip from "../fragment/MyTooltip"
 import { type Product } from "@/types/product"
-import { shopper } from "@/lib/shopper.config"
+import { formatCurency } from "@/lib/string-helper"
+import AddCart from "../AddCart"
 // import Productcar
 
 export default function ProductCard ({ product } : { product : Product}){
@@ -28,7 +29,7 @@ export default function ProductCard ({ product } : { product : Product}){
          </AspectRatio>
          <CardContent className="mt-3">
             <h1 className="text-base line-clamp-2 group-hover:underline" title={product.title}>{product.title}</h1>
-            <p className="font-semibold text-xl">$ {product.price}</p>
+            <p className="font-semibold text-xl">{formatCurency(product.price)}</p>
             <Badge className="my-3 capitalize" variant={"outline"}>
                {product.brand}
             </Badge>
@@ -44,11 +45,7 @@ export default function ProductCard ({ product } : { product : Product}){
             <Button className="flex-1 flex-shrink">
             <span className="mx-2 capitalize">buy now</span> 
             </Button>
-            <MyTooltip text="add to cart">
-               <Badge variant={"outline"} className="py-2 hover:bg-primary/30">
-               <RiShoppingBagLine size={20} />
-               </Badge>
-            </MyTooltip>
+            <AddCart product={product} />
          </CardFooter>
       </Card>
    )
