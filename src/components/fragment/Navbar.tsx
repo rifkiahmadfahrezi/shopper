@@ -1,14 +1,13 @@
 "use client"
 import Link from 'next/link'
 import ThemeToggler from './ThemeToggler'
-import { RiShoppingBagLine, RiMenu3Line, RiSearchLine } from '@remixicon/react'
+import { RiShoppingBagLine, RiMenuLine } from '@remixicon/react'
 import {
    Sheet,
    SheetContent,
    SheetTrigger,
  } from "@/components/ui/sheet"
  import { Separator } from '../ui/separator'
- import { Input } from '../ui/input'
  import { Button } from '@/components/ui/button'
  import SearchProduct from './SearchProduct'
  import { usePathname } from 'next/navigation'
@@ -29,24 +28,32 @@ const Navbar = () => {
        link: "/products",
        content : "Products"
      },
+     {
+       link: "/categories",
+       content : "Categories"
+     },
    ]
  
    const navAction = [
      {
        link: "/sign-in",
-       content: <Link 
+       content: <Button asChild variant={'outline'} >
+            <Link 
              href="/sign-in" 
-             className='capitalize font-medium btn btn-outline w-full'>
-               sign in
-             </Link>
+             className='capitalize font-medium'>
+              sign in
+            </Link>
+       </Button>
      },
      {
        link: "/sign-up",
-       content: <Link 
-             href="/sign-up" 
-             className='capitalize font-medium btn btn-default w-full'>
-               sign up
-             </Link>
+       content: <Button asChild>
+                    <Link 
+                      href="/sign-up" 
+                      className='capitalize font-medium'>
+                      sign up
+                    </Link>
+                </Button>
      },
    ]
  
@@ -58,7 +65,7 @@ const Navbar = () => {
              {shopper.title}
            </Link>
 
-           <div className="flex items-center gap-3 w-2/4 max-w-xl">
+           <div className="hidden lg:flex items-center gap-3 w-2/4 max-w-xl">
               <SearchProductForm />
            </div>
 
@@ -101,8 +108,8 @@ const Navbar = () => {
            <Sheet>
 
             <SheetTrigger asChild>
-               <Button variant="outline" className='ml-3'>
-                  <RiMenu3Line />
+               <Button  className='ml-3'>
+                  <RiMenuLine />
                </Button>
             </SheetTrigger>
             <SheetContent>

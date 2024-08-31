@@ -26,13 +26,13 @@ export default function ThemeSwitch() {
   )
 
   if (resolvedTheme === 'dark') {
-    return <Button variant={"outline"} onClick={() => setTheme('light')}>
+    return <Button variant={"ghost"} size={'icon'} onClick={() => setTheme('light')}>
       <RiSunFill  />
     </Button>
   }
 
   if (resolvedTheme === 'light') {
-    return <Button variant={"outline"} onClick={() => setTheme('dark')}>
+    return <Button variant={"ghost"} size={'icon'} onClick={() => setTheme('dark')}>
     <RiMoonFill  />
   </Button>
   }

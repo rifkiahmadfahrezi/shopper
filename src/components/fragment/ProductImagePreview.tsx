@@ -12,7 +12,7 @@ export interface ProductImages {
 export default function ProductImagePreview({ thumbnail, images }: ProductImages) {
   const [activeImg, setActiveImg] = useState<string>(thumbnail);
 
-  // console.log(images)
+  console.log(images, thumbnail)
 
   return (
     <><div className="grid gap-4">
@@ -25,6 +25,7 @@ export default function ProductImagePreview({ thumbnail, images }: ProductImages
             height={600}
             src={activeImg}
             width={800}
+            priority
           />
         </div>
         <Carousel className="w-full max-w-[550px] group">

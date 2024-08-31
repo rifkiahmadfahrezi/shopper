@@ -5,12 +5,17 @@ import ProductCardSkeleton from "../skeletons/ProductCardSkeleton"
 import ProductCard from "../ui/product-card"
 import GridLayout from "../layouts/GridLayout"
 import { useInView } from "react-intersection-observer"
-import { getProductsWithPaging } from "@/data/products"
-import { useEffect, useState } from "react"
+import { getProductsWithPaging, searchProduct } from "@/data/products"
+import { useEffect } from "react"
 import { useInfiniteQuery } from "@tanstack/react-query"
+import { useSelector } from "react-redux"
+import type { RootState } from "@/store/store"
+import { usePathname } from "next/navigation"
+
 
 export default function Products() {
-
+   const pathname = usePathname()
+   const searchKeyword = useSelector((state: RootState) => state.searchProduct.keyword)
    const { 
       data, 
       error, 
@@ -22,7 +27,7 @@ export default function Products() {
          queryKey: ["products"],
          initialPageParam : 0,
          queryFn: ({ pageParam = 0 }) => {
-            return getProductsWithPaging(pageParam, 30);
+            return getProductsWithPaging(pageParam, 30) ;
          },
          getNextPageParam: (lastPage) => {
             return lastPage && lastPage.skip + lastPage.limit;

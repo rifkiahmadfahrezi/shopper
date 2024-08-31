@@ -11,6 +11,8 @@ import { useEffect, Suspense } from "react"
 import { useInView } from "react-intersection-observer"
 import Link from "next/link"
 
+import { useSelector } from "react-redux"
+
 
 export default function ProductResultsPage() {
    return <>

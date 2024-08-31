@@ -41,10 +41,10 @@ export default function ProductDetailsPage({ productId } : { productId: number |
 
    return (
       <MainContainer className="container mx-auto px-5">
-        <div className="flex items-center flex-col lg:flex-row gap-6 py-6">
+        <div className="flex items-center flex-col lg:flex-row gap-6 py-6 justify-center ">
           <div className="w-full max-w-[550px]">
             <ProductImagePreview 
-              thumbnail={product.images[0]}
+              thumbnail={product.thumbnail}
               images={product.images}
             />
           </div>
@@ -54,7 +54,7 @@ export default function ProductDetailsPage({ productId } : { productId: number |
             <div>
               <h1 className="font-bold text-3xl lg:text-4xl">{product.title}</h1>
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
               <div className="flex items-center gap-0.5">
                 <RiStarFill className="size-5 fill-yellow-500" />
                 {product.rating}
@@ -65,8 +65,8 @@ export default function ProductDetailsPage({ productId } : { productId: number |
                   <span className="capitalize">stock ({product.stock})</span>
                 </div>
               }
-              <div className="text-4xl font-bold">$ {product.price}</div>
             </div>
+            <p className="text-4xl font-bold">$ {product.price}</p>
           <Separator />
           <article className="min-h-[200px]">
             {product.description}

@@ -9,6 +9,7 @@ import {
  import { Input } from "../ui/input"
  import { Button } from "../ui/button"
  import { RiSearchLine } from "@remixicon/react"
+ import SearchProductForm from "../forms/SearchProductForm"
 
  
  export default function SearchProduct() {
@@ -20,12 +21,7 @@ import {
          <DialogContent>
             <DialogHeader>
                <DialogTitle className="mb-7">Search some product...</DialogTitle>
-                 <form className="flex w-full items-center space-x-2">
-                  <Input type="search" placeholder="Shoes..." />
-                  <Button type="submit">
-                    <RiSearchLine size={16}/>
-                  </Button>
-                </form>
+               <SearchProductForm />
             </DialogHeader>
          </DialogContent>
       </Dialog>
