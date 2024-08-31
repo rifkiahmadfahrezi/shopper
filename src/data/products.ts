@@ -56,7 +56,7 @@ export const searchProduct = async(keyword : string, skip: number = 0, limit : n
     } | undefined
 > => {
    try {
-      const req = await myShop.get(`/products/search?q=${keyword}&${skip && 'skip=' + skip}&${limit && 'limit=' + limit}`)
+      const req = await myShop.get(`/products/search?limit=${limit}&skip=${skip}&q=${keyword || ''}`)
 
       if (req.status !== 200){
          // return undefined
@@ -70,7 +70,8 @@ export const searchProduct = async(keyword : string, skip: number = 0, limit : n
    }
 } 
 
-export const getProductsWithPaging = async ( skip : number = 0, limit : number = 10,) : Promise<
+export const getProductsWithPaging = async ( skip : number = 0, limit : number = 10) 
+: Promise<
    { 
       products: Product[];
       total: number;
@@ -79,7 +80,32 @@ export const getProductsWithPaging = async ( skip : number = 0, limit : number =
     } | undefined
 >  => {
    try {
-      const req = await myShop.get(`/products?limit=${limit}&skip=${skip}`)
+      let url =  `/products?limit=${limit}&skip=${skip}`
+
+      const req = await myShop.get(url)
+      if (req.status !== 200){
+         throw new Error("Failed to get product => " + req.status)
+      }
+      return req.data
+
+   } catch (error) {
+      console.error(error)
+      return undefined
+   }
+}
+export const getProductByCategory = async ( skip : number = 0, limit : number = 10, category: string) 
+: Promise<
+   { 
+      products: Product[];
+      total: number;
+      skip: number;
+      limit: number
+    } | undefined
+>  => {
+   try {
+      let url =  `/products/category/${category}?limit=${limit}&skip=${skip}`
+
+      const req = await myShop.get(url)
       if (req.status !== 200){
          throw new Error("Failed to get product => " + req.status)
       }
