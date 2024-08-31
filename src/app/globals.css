@@ -98,15 +98,6 @@
     .btn-lg{
       @apply h-10 rounded-md px-8;
     }
-    ::-webkit-scrollbar {
-      @apply bg-secondary;
-    }
-    ::-webkit-scrollbar-track {
-      @apply bg-background;
-    }
-    ::-webkit-scrollbar-thumb {
-      @apply bg-primary/20 rounded-lg;
-    }
 /*      
     
      

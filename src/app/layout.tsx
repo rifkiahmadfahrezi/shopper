@@ -14,12 +14,9 @@ export const metadata: Metadata = {
 
 import QueryClientProvider from "@/components/QueryClientProvider";
 import ProgressProvider from "@/components/progress-bar";
-import Navbar from "@/components/fragment/Navbar";
-import Footer from "@/components/fragment/Footer";
 import ThemeProvider from "@/components/ThemeProvider";
 import { Suspense } from "react";
-
-import AuthProvider from "@/components/AuthProvider";
+import StoreProvider from "@/components/StoreProvider";
 import { Toaster } from "@/components/ui/toaster";
 
 export default function RootLayout({
@@ -29,20 +26,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png"/>
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png"/>
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png"></link>
+      <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
       <body className={inter.className}>
       <QueryClientProvider>
         <ThemeProvider>
           <ProgressProvider>
-            <AuthProvider>
+            <StoreProvider>
               <Suspense fallback="Loading...">
-                <Navbar />
-                  <main className="min-h-svh">
-                    {children}
-                  </main>
-                <Footer />
+                  {children}
                 <Toaster />
               </Suspense>
-            </AuthProvider>
+            </StoreProvider>
           </ProgressProvider>
         </ThemeProvider>
       </QueryClientProvider>

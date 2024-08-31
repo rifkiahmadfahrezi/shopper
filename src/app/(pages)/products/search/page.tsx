@@ -6,7 +6,7 @@ interface Props {
    searchParams : { q : string }
 }
 
-export default function SearchProductPage({ searchParams } : Props) {
+export default function SearchProductPage() {
 
    return <>
       <ProductResults />

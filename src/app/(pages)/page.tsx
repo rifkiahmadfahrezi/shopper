@@ -1,8 +1,7 @@
 
 import HomeBanner from "@/components/fragment/HomeBanner"
-// import ProductList from "@/components/fragment/ProductsList"
-// import { getProduct } from "@/data/products"
 import Products from "@/components/fragment/Products"
+import Categories from "@/components/fragment/Categories"
 
 const HomePage : React.FC = ()  => {
 
@@ -12,9 +11,10 @@ const HomePage : React.FC = ()  => {
       <div className="container mx-auto px-4">
         <HomeBanner />
 
+        <h1 className="text-center text-xl md:text-2xl font-semibold my-8 capitalize">Categories</h1>
+        <Categories />
         <h1 className="text-center text-xl md:text-2xl font-semibold my-8 capitalize">Our products</h1>
-            <Products />
-          {/* <ProductList /> */}
+        <Products />
       </div>
     </>
   )
