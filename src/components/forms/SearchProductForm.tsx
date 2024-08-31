@@ -3,36 +3,34 @@
 import { Input } from "../ui/input"
 import { Button } from "../ui/button"
 import { RiSearchLine } from "@remixicon/react"
-import { useState } from "react"
-import { useSearchParams, useRouter, usePathname } from "next/navigation"
+import { useSearchParams, useRouter } from "next/navigation"
+
+import { changeKeyword } from "@/store/slices/searchProductSlice"
+import { useRef } from "react"
 
 export default function SearchProductForm() {
 
-   const [keyword, setKeyword] = useState<string>("")
-
-   const { replace } = useRouter()
-   const pathname = usePathname();
+   const router = useRouter()
    const searchParams = useSearchParams()
+   const keywordRef = useRef<HTMLInputElement | null>(null)
 
    const handleSearch = async (e : React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
-      const params = new URLSearchParams(searchParams)
-      if(keyword){
-         params.set("q", keyword)
-      }else{
-         params.delete("q")
+   
+      let url = '/products/search'
+      if (keywordRef.current) {
+         url += `?q=${keywordRef.current.value}`
       }
-      replace(`/products/search?q=${keyword}`);
+      router.push(url)
    }
 
    return (
       <form className="flex w-full items-center space-x-2" onSubmit={handleSearch}>
          <Input 
+            ref={keywordRef}
             defaultValue={searchParams.get("q")?.toString()}
-            type="search" 
-            onChange={(e) => {
-            setKeyword(e.target.value)
-         }} placeholder="Shoes..." />
+            type="search"
+            placeholder="Shoes..." />
          <Button type="submit">
             <RiSearchLine size={16}/>
          </Button>
