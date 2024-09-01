@@ -5,7 +5,6 @@ import { Button } from "../ui/button"
 import { RiSearchLine } from "@remixicon/react"
 import { useSearchParams, useRouter } from "next/navigation"
 
-import { changeKeyword } from "@/store/slices/searchProductSlice"
 import { useRef } from "react"
 
 export default function SearchProductForm() {
