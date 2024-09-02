@@ -15,12 +15,15 @@ import {
  import DropdownCart from './DropdownCart'
  import { shopper } from '@/lib/shopper.config'
 import SearchProductForm from '../forms/SearchProductForm'
+import { useSelector } from 'react-redux'
+import { Badge } from '../ui/badge'
+import { RootState } from '@/store/store'
 
 
 const Navbar = () => { 
 
   const pathname = usePathname()
-
+  const cart = useSelector((state: RootState) => state.cart)
   const activeLink = (current : string) : boolean => pathname == current
 
    const navLinks = [
@@ -92,7 +95,10 @@ const Navbar = () => {
            <div className="flex items-center xl:hidden">
             <ul className='flex item-center gap-3 bg-blue'>
               <li className=''>
-                <Link href="/cart">
+                <Link href="/cart" className='relative'>
+                   {cart.totalItem !== 0 &&
+                    <Badge variant={'secondary'} className="absolute -bottom-1 -left-1 py-1 px-2" >{cart.totalItem}</Badge>
+                  }
                   <div className="btn btn-ghost">
                   <RiShoppingBagLine size={24} />
                   </div>

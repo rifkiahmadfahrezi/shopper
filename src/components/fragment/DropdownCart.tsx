@@ -16,6 +16,8 @@ import { useSelector } from "react-redux"
 import { RootState } from "@/store/store"
 import { formatCurency } from "@/lib/string-helper"
 import type { CartItem as CartItemType  } from "@/types/cart"
+import { Badge } from "../ui/badge"
+import { Button } from "../ui/button"
 
 export default function DropdownCart() {
 
@@ -24,7 +26,10 @@ export default function DropdownCart() {
    return (
       <>
       <DropdownMenu>
-         <DropdownMenuTrigger className="btn btn-ghost">
+         <DropdownMenuTrigger className="btn btn-ghost relative">
+            {cart.totalItem !== 0 &&
+               <Badge variant={'secondary'} className="absolute -bottom-1 -left-1 py-1 px-2" >{cart.totalItem}</Badge>
+            }
             <RiShoppingBagLine />
          </DropdownMenuTrigger>
          
@@ -32,12 +37,6 @@ export default function DropdownCart() {
             <DropdownMenuLabel className="py-2 flex items-center justify-between">
                <span>My cart ({cart.products.length})</span>
 
-               
-               { cart.products.length !== 0 &&
-                  <Link href={'/cart'} className="btn btn-outline capitalize ">
-                     Check out!
-                  </Link>
-               }
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <div className="h-full w-[400px] max-h-72 overflow-y-auto">
@@ -50,8 +49,19 @@ export default function DropdownCart() {
                   ))
                }
             </div>
-            <DropdownMenuSeparator />
-            <p className="py-1 px-2 text-right" >Total: {formatCurency(cart.totalPrice)}</p>
+            {cart.totalItem !== 0 &&
+            <>
+               <DropdownMenuSeparator />
+               <div className="flex justify-between items-center py-1 px-2">
+                  <Button asChild size={'sm'}  >
+                     <Link href={'/cart'} className="capitalize">
+                        Check out!
+                     </Link>
+                  </Button>
+                  <p>Total: {formatCurency(cart.totalPrice)}</p>
+               </div>
+            </>
+            }
          </DropdownMenuContent>
       </DropdownMenu>
 
