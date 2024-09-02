@@ -1,18 +1,32 @@
+'use client'
 
 import { Card, CardContent, CardFooter } from "./card"
 import Image from "next/image"
 import { Badge } from "./badge"
-import { RiStarFill, RiShoppingBagLine } from "@remixicon/react"
+import { RiStarFill } from "@remixicon/react"
 import { AspectRatio } from "./aspect-ratio"
 import Link from "next/link"
 import { Button } from "./button"
-import MyTooltip from "../fragment/MyTooltip"
 import { type Product } from "@/types/product"
 import { formatCurency } from "@/lib/string-helper"
 import AddCart from "../AddCart"
-// import Productcar
+
+import { useSelector } from "react-redux"
+import { RootState } from "@/store/store"
+import { useMemo } from "react"
 
 export default function ProductCard ({ product } : { product : Product}){
+
+   const cart = useSelector((state : RootState) => state.cart)
+
+   const numOfProductOnCart = useMemo(() => {
+      const item = cart.products.find((p) => p.id === product.id)
+      if(!item){
+         return 0
+      }
+      return item.amount
+   }, [cart.products, product.id])
+
    return (
       <Card key={product.id} className="overflow-hidden group">
       <Link href={`/products/${encodeURI(`${product.id}`)}`}>
@@ -45,7 +59,12 @@ export default function ProductCard ({ product } : { product : Product}){
             <Button className="flex-1 flex-shrink">
             <span className="mx-2 capitalize">buy now</span> 
             </Button>
-            <AddCart product={product} />
+            <div className="relative">
+               {numOfProductOnCart !== 0 &&
+                  <Badge className="absolute -top-2 -right-2 py-1 px-2" >{numOfProductOnCart}</Badge>
+               }
+               <AddCart product={product} />
+            </div>
          </CardFooter>
       </Card>
    )
